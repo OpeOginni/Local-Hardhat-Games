@@ -1,27 +1,14 @@
 // add the game address here and update the contract name if necessary
-const gameAddr = "0x610178dA211FEF7D417bC0e6FeD39F05609AD788";
-const contractName = "Game5";
+const gameAddr = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+const contractName = "Game4";
 
 async function main() {
   // attach to the game
   const game = await hre.ethers.getContractAt(contractName, gameAddr);
 
-  // FOR GAME 2 uncomment the bellow functions
-  // await game.setX(25);
-  // await game.setY(25);
-
-  // FOR GAME 3 uncomment the bellow function
-  // const tx = await game.win(45);
-
-  // FOR GAME 4 uncomment the bellow functions
-  // const tx = await game.win(56);
-
-  // FOR GAME 5 uncomment the bellow functions
-  // await game.giveMeAllowance(20000);
-  // await game.mint(20000);
-
+  // This is a tricky one....But from the contract we see that all variables are in Uint8...meaning it has a limit of 255, so get the value to be equal to 10 above 255 which is 266 then it will correspond to 10 in uint8
   // do whatever you need to do to win the game here:
-  const tx = await game.win();
+  const tx = await game.win(56);
 
   // did you win? Check the transaction receipt!
   // if you did, it will be in both the logs and events array
@@ -35,3 +22,6 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+// Use the following command to run
+// npx hardhat run scripts/game4.js
